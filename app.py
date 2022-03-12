@@ -13,7 +13,7 @@ def index():
     rates = response.json()["rates"]
     rates = {key: 1 / value for key, value in rates.items()}
     global views
-    views += views
+    views += 1
     return render_template('index.html', time=time, views=views, rates=rates.items())
 
 @app.get('/<currency>')
