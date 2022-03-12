@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import datetime
 import requests
 
+views = 0
 
 app = Flask(__name__)
 
@@ -11,7 +12,9 @@ def index():
     response = requests.get("https://www.cbr-xml-daily.ru/latest.js")
     rates = response.json()["rates"]
     rates = {key: 1 / value for key, value in rates.items()}
-    return render_template('index.html', time=time, rates=rates.items())
+    global views
+    views += views
+    return render_template('index.html', time=time, views=views, rates=rates.items())
 
 @app.get('/<currency>')
 def get(currency):
